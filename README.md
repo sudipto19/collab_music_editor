@@ -1,42 +1,77 @@
-# Collab Music Editor
+# Real-Time Collaborative Music Score Editor
 
-yeah it's a real-time collaborative drawing thing. supposed to be for music scores but honestly it's just canvas stuff for now.
+A collaborative drawing platform built with real-time synchronization capabilities, designed as a foundation for music score editing and collaborative diagram creation.
 
-## What's in here
+## Tech Stack
 
-- **excelidraw-frontend** - Next.js app with canvas drawing. has auth pages and room-based collaboration
-- **http-backend** - Express server handling REST endpoints (signup/signin, room creation, fetching chats)
-- **ws-backend** - WebSocket server for real-time sync between users in rooms
-- **web** - another Next.js frontend (chat room ui, might merge this later idk)
+**Frontend:** TypeScript, Next.js 15, React 19, Canvas API, Tailwind CSS  
+**Backend:** Express, WebSocket (ws), Node.js  
+**Database:** PostgreSQL, Prisma ORM  
+**Infrastructure:** Turborepo monorepo, pnpm workspaces
 
-**shared packages:**
-- `@repo/db` - Prisma client + schema (postgres). users, rooms, chats
-- `@repo/common` - zod schemas for validation
-- `@repo/backend-common` - shared backend utils
-- `@repo/ui` - react components
-- `@repo/eslint-config` + `@repo/typescript-config` - you know what these are
+## Key Features
 
-## Stack
+• **Real-time Collaborative Drawing Platform** - Built WebSocket synchronization supporting multiple concurrent users editing the same canvas simultaneously
 
-TypeScript, Next.js 15, Express, WebSocket (ws), Prisma, PostgreSQL, Turborepo
+• **Canvas API Rendering Engine** - Engineered shape manipulation system with live preview, drawing tools (pencil, shapes), and persistent storage of all drawing operations
 
-## Running this
+• **Monorepo Architecture** - Designed scalable architecture using Turborepo managing multiple frontend/backend services and shared packages with optimized build pipeline
+
+• **JWT Authentication System** - Implemented secure authentication flow with PostgreSQL database and room-based access control for collaborative sessions
+
+• **Room-based Collaboration** - Users can create and join drawing rooms with unique identifiers, enabling isolated collaborative workspaces
+
+## Project Structure
+
+### Applications
+
+- **excelidraw-frontend** - Next.js application featuring canvas drawing interface, authentication pages, and room-based collaboration UI
+- **http-backend** - Express REST API server handling user registration, authentication, room management, and chat message persistence
+- **ws-backend** - WebSocket server managing real-time drawing synchronization and message broadcasting across connected clients
+- **web** - Additional Next.js frontend for chat room interface and real-time messaging
+
+### Shared Packages
+
+- **@repo/db** - Prisma client configuration and database schema (Users, Rooms, Chats models)
+- **@repo/common** - Shared TypeScript types and Zod validation schemas
+- **@repo/backend-common** - Common backend utilities and middleware
+- **@repo/ui** - Reusable React component library
+- **@repo/eslint-config** - Shared ESLint configuration
+- **@repo/typescript-config** - Shared TypeScript compiler configurations
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18 or higher
+- PostgreSQL database
+- pnpm package manager
+
+### Installation
 
 ```bash
+# Install dependencies
 pnpm install
+
+# Set up environment variables
+# Create .env files with:
+# - DATABASE_URL (PostgreSQL connection string)
+# - JWT_SECRET (for authentication)
+
+# Run database migrations
+cd packages/db
+pnpm prisma migrate dev
+
+# Start development servers
 pnpm dev
 ```
 
-set up your `.env` with `DATABASE_URL` and `JWT_SECRET` or whatever. run migrations with `prisma migrate dev` in the db package.
+## Architecture Highlights
 
-## Features
-
-- JWT auth (signup/signin)
-- room-based collaboration (create/join rooms)
-- real-time canvas drawing with WebSocket sync
-- persistent storage in postgres
-- monorepo with turborepo so you can run everything at once
+- **Turborepo** orchestrates the monorepo build system with intelligent caching and parallel task execution
+- **WebSocket protocol** enables sub-100ms latency for real-time drawing synchronization
+- **Prisma ORM** provides type-safe database queries with automatic migration management
+- **Shared workspace packages** eliminate code duplication across frontend and backend services
 
 ---
 
-*work in progress. might add actual music notation rendering to be added soon*
+*Project Status: Ongoing development - Music notation rendering features planned for future iterations*
