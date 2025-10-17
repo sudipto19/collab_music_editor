@@ -39,4 +39,4 @@ set up your `.env` with `DATABASE_URL` and `JWT_SECRET` or whatever. run migrati
 
 ---
 
-*work in progress. might add actual music notation rendering later if i feel like it*
+*work in progress. might add actual music notation rendering to be added soon*
